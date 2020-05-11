@@ -1,0 +1,19 @@
+{
+  "name": "bpm",
+  "version": "1.0.0",
+  "description": "Sorts songs from your spotify playlist based on bpm",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/becauselol/bpmApp.git"
+  },
+  "author": "becauselol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/becauselol/bpmApp/issues"
+  },
+  "homepage": "https://github.com/becauselol/bpmApp#readme"
+}
