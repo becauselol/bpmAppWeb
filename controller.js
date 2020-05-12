@@ -33,8 +33,9 @@ exports.getUserID = async (access) => {
 	};
 };
 
-exports.logPlaylists = async (access, userID) => {
+exports.logPlaylists = async (access, userID, url = `https://api.spotify.com/v1/users/${userID}/playlists`) => {
 	const playlistOptions = options.playlist(access, userID);
+	playlistOptions.url = url;
 	const result = await axios({
 		method: "get",
 		url: playlistOptions.url,

@@ -25,7 +25,6 @@ exports.user = (access) => {
 
 exports.playlist = (access, userID) => {
 	return {
-		url: `https://api.spotify.com/v1/users/${userID}/playlists` ,
 		headers: { 'Authorization': `Bearer ${access}` }
 	};
 };
