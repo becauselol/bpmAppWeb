@@ -23,38 +23,29 @@ const authorizationInit = async () => {
   	await open(authEndpoint);
 };
 
-app.get("/callback", (req, res) => {
-	const code = req.query.code;
-	const authOptions = {
-	    url: "https://accounts.spotify.com/api/token",
-	    form: {
-		    code: code,
-		    redirect_uri: redirect_uri,
-		    grant_type: "authorization_code",
-	    },
-	    headers: {
-		    "content-type": "application/x-www-form-urlencoded",
-			Authorization:
-		        "Basic " +
-		        Buffer.from(`${client_id}:${client_secret}`).toString("base64"), // client id and secret from env
-    	},
-	};
-	console.log("REQUESTING TOKENS...");
+app.get("/callback", async (req, res) => {
+	try {
+		//get access token
+		const [access_token, refresh_token] = await ctrl.getAccessToken(req.query.code, redirect_uri, client_id, client_secret);
+		console.log(access_token);
+		//get user ID
+		const userID = await ctrl.getUserID(access_token);
+		//log users playlists
+		
+		//prompt user to choose a playlist or go to next
 
-	//test to request for profile info
-	axios({
-		method: "post",
-		url: authOptions.url,
-		data: querystring.stringify(authOptions.form),
-		headers: authOptions.headers,
-	})
-	.then((res) => {
-		const access_token = res.data.access_token;
-		const refresh_token = res.data.refresh_token;
-	})
-	.catch((err) => {
+		//once user chooses a playlist save songID to an array
+
+		//get tempo for all songs, based on spotify "tempo"
+
+		//return song list that qualifies the data
+
+		//create new playlist
+
+		//post new playlist
+	} catch (err) {
 		console.log(err);
-	});
+	}
 });
 
 
