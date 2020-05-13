@@ -2,38 +2,17 @@ const axios = require("axios"); //http functions
 const express = require("express");
 const querystring = require("querystring");
 const open = require("open"); //allows us to open browser window automatically
-const prompt = require("prompt");
+const inquirer = require("inquirer");
 const fs = require("fs");
 const ctrl = require("./controller.js");
 const p = require("./prompting.js");
 const data = require("./dataHandler.js");
 const app = express();
-prompt.start();
 //
 const client_id = "f966e822e8624e3199d760c33b09fea2";
 const client_secret = "56307ffa16554146b70ea667317a9014";
 const redirect_uri = "http://localhost:8888/callback";
 const scope = "playlist-read-private playlist-modify-private";
-
-const actionSchema = {
-	properties: {
-		command: {
-			message: 'stop or next',
-			required: true
-		}
-	}
-};
-
-const tempoSchema = {
-	properties: {
-		MaxTempo: {
-			required: true
-		},
-		MinTempo: {
-			required: true
-		}
-	}
-};
 
 const authEndpoint =
 	"https://accounts.spotify.com/authorize?" +
@@ -64,31 +43,24 @@ app.get("/callback", async (req, res) => {
 		const userID = await ctrl.getUserID(access_token);
 
 		//get BPM requested
-		prompt.get(tempoSchema, async (err, result) => {
+		const tempo = await p.selectTempo(); //tempo.bpmMax  and tempo.bpmMin represent the values
 
-			//get users playlists
-			let playlistRes = await ctrl.logPlaylists(access_token, userID);
-			const totalPlaylists = playlistRes.data.total;
-			let nextPage = playlistRes.data.next;
-			let playlists = data.store(playlistRes.data.items);
-			data.print(playlists);
+		//get users playlists
+		const selected = await ctrl.playlistSelector(access_token, userID);
+		const playlistID = data.getPlaylistID(selected);
 
-			//prompt user to choose a playlist or go to next
-			p.nextPlaylist(actionSchema, nextPage, totalPlaylists, playlistRes, access_token, userID, playlists);
+		//get songs from the playlists
+		const songList = await ctrl.getSongList(access_token, playlistID);
+		//once user chooses a playlist save songID to an array
 
-			//once user chooses a playlist save songID to an array
-			prompt.get()
+		//get tempo for all songs, based on spotify "tempo"
 
-			//get tempo for all songs, based on spotify "tempo"
-			const tempoMax = result.MaxTempo
-			const tempoMin = result.MinTempo
-			//return song list that qualifies the data
+		//return song list that qualifies the data
 
-			//create new playlist
+		//create new playlist
 
-			//post new playlist
+		//post new playlist
 
-		})
 	} catch (err) {
 		console.log(err);
 	}
