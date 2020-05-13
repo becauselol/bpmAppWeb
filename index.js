@@ -9,8 +9,8 @@ const p = require("./prompting.js");
 const data = require("./dataHandler.js");
 const app = express();
 //
-const client_id = "f966e822e8624e3199d760c33b09fea2";
-const client_secret = "56307ffa16554146b70ea667317a9014";
+const client_id = "CLIEN_ID";
+const client_secret = "CLIENT_SECRET";
 const redirect_uri = "http://localhost:8888/callback";
 const scope = "playlist-read-private playlist-modify-private playlist-modify-public";
 
