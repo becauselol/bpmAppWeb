@@ -15,10 +15,10 @@ const client_secret = "56307ffa16554146b70ea667317a9014";
 const redirect_uri = "http://localhost:8888/callback";
 const scope = "playlist-read-private playlist-modify-private";
 
-const schema = {
+const actionSchema = {
 	properties: {
 		command: {
-			message: 'Only valid numbers or next',
+			message: 'stop or next',
 			required: true
 		}
 	}
@@ -59,19 +59,25 @@ app.get("/callback", async (req, res) => {
 		//get access token
 		const [access_token, refresh_token] = await ctrl.getAccessToken(req.query.code, redirect_uri, client_id, client_secret);
 		console.log("TOKENS RECEIVED...");
+
 		//get user ID
 		const userID = await ctrl.getUserID(access_token);
+
 		//get BPM requested
 		prompt.get(tempoSchema, async (err, result) => {
+
 			//get users playlists
 			let playlistRes = await ctrl.logPlaylists(access_token, userID);
 			const totalPlaylists = playlistRes.data.total;
 			let nextPage = playlistRes.data.next;
 			let playlists = data.store(playlistRes.data.items);
 			data.print(playlists);
+
 			//prompt user to choose a playlist or go to next
-			p.nextPlaylist(schema, nextPage, totalPlaylists, playlistRes, access_token, userID, playlists);
+			p.nextPlaylist(actionSchema, nextPage, totalPlaylists, playlistRes, access_token, userID, playlists);
+
 			//once user chooses a playlist save songID to an array
+			prompt.get()
 
 			//get tempo for all songs, based on spotify "tempo"
 			const tempoMax = result.MaxTempo
