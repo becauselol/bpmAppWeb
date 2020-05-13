@@ -25,13 +25,21 @@ exports.user = (access) => {
 
 exports.playlist = (access, userID) => {
 	return {
+		url:`https://api.spotify.com/v1/users/${userID}/playlists`,
 		headers: { 'Authorization': `Bearer ${access}` }
 	};
 };
 
-exports.songList = (access, playlistID) => {
+exports.trackList = (access, playlistID) => {
 	return {
 		url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
 		headers: { 'Authorization': `Bearer ${access}` },
+	}
+}
+
+exports.audioFeatures = (access) => {
+	return {
+		url: `https://api.spotify.com/v1/audio-features`,
+		headers: { 'Authorization': `Bearer ${access}` }
 	}
 }

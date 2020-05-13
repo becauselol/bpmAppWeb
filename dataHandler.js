@@ -22,3 +22,15 @@ exports.getPlaylistID = (playlist) => {
 		}
 	}
 };
+
+exports.filterTempo = (songList, min, max) => { //songlist is tempo and id
+	const result = [];
+	for(i = 0; i < songList.length ; i++) {
+		if(songList[i].tempo > min && songList[i].tempo < max) {
+			result.push(songList[i]);
+		} else {
+			continue
+		}
+	}
+	return result
+}

@@ -66,14 +66,89 @@ exports.playlistSelector = async (access_token, userID, nextPage = `https://api.
 };
 
 exports.getSongList = async (access, playlistID) => {
-	const songListOptions = options.songList(access, playlistID);
+	const songList = [];
+	const songListOptions = options.trackList(access, playlistID);
 	try {
 		const response = await axios({
 			method: "get",
 			url: songListOptions.url,
-			headers: songListOptions.headers
+			headers: songListOptions.headers,
+			params: {
+				fields: 'items(track(id))'
+			}
 		})
-		console.log(response.data.items);
+		for(i = 0; i < response.data.items.length; i++) {
+			songList.push(response.data.items[i].track.id)
+		};
+		return songList; //returns IDs only
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+exports.getTempo = async (access, songIDs) => { //maximum limit 100 songs
+	const tempoAndID = [];
+	const featureOptions = options.audioFeatures(access)
+	try {
+		const response = await axios ({
+			method: "get",
+			url: featureOptions.url,
+			headers: featureOptions.headers,
+			params: {
+				ids: songIDs.join()
+			}
+		});
+		for (i = 0; i < response.data.audio_features.length; i++) {
+			tempoAndID.push({
+				id: songIDs[i],
+				tempo: response.data.audio_features[i].tempo,
+				uri: response.data.audio_features[i].uri
+			})
+		}
+		return tempoAndID;
+	} catch (err) {
+		console.log(err);
+	};
+};
+
+exports.createPlaylist = async (access, userID, selected, min, max) => {
+	const createOptions = options.playlist(access, userID);
+	createOptions.headers["Content-Type"] = "application/json"
+	try {
+		const response = await axios({
+			method: "post",
+			url: createOptions.url,
+			headers: createOptions.headers,
+			data: {
+				name: `${selected} : ${min} - ${max} BPM`
+			}
+		})
+		return {
+			id: response.data.id,
+			name: response.data.name
+		}
+	} catch (err) {
+		console.log(err);
+	}
+}
+
+exports.addSongs = async (access, playlistID, songList) => {
+	const songURIs = []
+	const addOptions = options.trackList(access, playlistID);
+	addOptions.headers["Content-Type"] = "application/json"
+	for (i = 0; i < songList.length; i++) {
+		songURIs.push(songList[i].uri);
+	};
+	try {
+		const response = await axios({
+			method: "post",
+			url: addOptions.url,
+			headers: addOptions.headers,
+			data: {
+				uris: songURIs
+			}
+		})
+		return response.status
 	} catch (err) {
 		console.log(err);
 	}
