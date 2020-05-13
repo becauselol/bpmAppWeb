@@ -1,17 +1,24 @@
 const data = [];
 
+
 exports.store = (playlistArr) => {
+	const playlistName = [];
 	for(i = 0; i < playlistArr.length; i++) {
 		data.push({
 			name: playlistArr[i].name,
 			id: playlistArr[i].id
 		});
 	};
-	return data;
+	for(i = 0; i< playlistArr.length; i++) {
+		playlistName.push(playlistArr[i].name)
+	}
+	return playlistName;
 };
 
-exports.print = (playlists) => {
+exports.getPlaylistID = (playlist) => {
 	for(i = 0; i < data.length; i++) {
-		console.log(`${i}	${data[i].name}`)
-	};
-}
+		if(data[i].name === playlist) {
+			return data[i].id;
+		}
+	}
+};
