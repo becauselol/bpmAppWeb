@@ -44,29 +44,3 @@ exports.selectPlaylist = async (playlistNames) => {
 		return input;
 	})
 }
-
-// exports.nextPlaylist = async (schema, nextPage, totalPlaylists, playlistRes, access_token, userID, playlists) => {
-// 	prompt.get(schema, async (err, result) => {
-// 		if (result.command === "next") {
-// 			try {
-// 				//get next page of playlists
-// 				//prompt user again
-// 				playlistRes = await ctrl.logPlaylists(access_token, userID, nextPage);
-// 				playlists = data.store(playlistRes.data.items);
-// 				nextPage = playlistRes.data.next;
-// 				data.print(playlists);
-// 				exports.nextPlaylist(schema, nextPage, totalPlaylists, playlistRes, access_token, userID, playlists);
-// 			} catch (err) {
-// 				console.log(err);
-// 			}
-// 		} else if (result.command === "stop") {//if (typeof(result.command) === "number") {
-// 			//return a number !! reminder to set validators for the schema;
-// 			console.log("Playlist Found!");
-// 			prompt.get(['Selection'], )
-// 		}
-// 	})
-// }
-//
-// exports.selectPlaylist = async (obj, schema) => {
-// 	prompt.addProperties(obj, ['Selection'], function (err) {});
-// };
