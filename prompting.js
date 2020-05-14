@@ -31,15 +31,39 @@ exports.selectTempo = async () => {
 		})
 }
 
-exports.selectPlaylist = async (playlistNames) => {
-	return await inquirer.prompt([
-		{
-			type: 'rawlist',
-			name: 'selection',
-			message: 'Select or move to next?',
-			choices: [...playlistNames, 'next']
+exports.selectPlaylist = async (playlistNames, prev, next) => {
+	const choices = (() => {
+		if (prev === null) {
+			return [
+				{
+					type: 'rawlist',
+					name: 'selection',
+					message: 'Select or move to next?',
+					choices: [...playlistNames, 'next']
+				}
+			]
+		} else if (next === null) {
+			return [
+				{
+					type: 'rawlist',
+					name: 'selection',
+					message: 'Select or move to next?',
+					choices: [...playlistNames, 'prev']
+				}
+			]
+		} else {
+			return [
+				{
+					type: 'rawlist',
+					name: 'selection',
+					message: 'Select or move to next?',
+					choices: [...playlistNames, 'prev', 'next']
+				}
+			]
 		}
-	],
+	})()
+
+	return await inquirer.prompt(choices,
 	(input) => {
 		return input;
 	})
