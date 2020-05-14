@@ -9,7 +9,7 @@ const p = require("./prompting.js");
 const data = require("./dataHandler.js");
 const app = express();
 //
-const client_id = "CLIEN_ID";
+const client_id = "CLIENT_ID";
 const client_secret = "CLIENT_SECRET";
 const redirect_uri = "http://localhost:8888/callback";
 const scope = "playlist-read-private playlist-modify-private playlist-modify-public";
@@ -51,10 +51,10 @@ app.get("/callback", async (req, res) => {
 		const tempo = await p.selectTempo(); //tempo.bpmMax  and tempo.bpmMin represent the values
 
 		//get songIDs from the playlists
-		let songList = await ctrl.getSongList(access_token, playlistID);
+		let songList = await ctrl.getSongID(access_token, playlistID);
 
 		//get tempo from spotify
-		songList = await ctrl.getTempo(access_token, songList); //returns object with tempo and ID
+		songList = await ctrl.getURIandTempo(access_token, songList); //returns object with tempo and ID
 
 		//return song list that qualifies the data
 		songList = data.filterTempo(songList, tempo.bpmMin, tempo.bpmMax)
@@ -64,8 +64,10 @@ app.get("/callback", async (req, res) => {
 
 		//post songs
 		const result = await ctrl.addSongs(access_token, newPlaylist.id, songList)
-		if (result == 201) {
+		if (result) {
 			console.log(`Your new playlist, ${newPlaylist.name}, has been created!`)
+		} else {
+			console.log('Oops, something went wrong')
 		}
 	} catch (err) {
 		console.log(err);
