@@ -8,9 +8,10 @@ const ctrl = require("./controller.js");
 const p = require("./prompting.js");
 const data = require("./dataHandler.js");
 const app = express();
+require("dotenv").config();
 //
-const client_id = "CLIENT_ID";
-const client_secret = "CLIENT_SECRET";
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = "http://localhost:8888/callback";
 const scope = "playlist-read-private playlist-modify-private playlist-modify-public";
 
