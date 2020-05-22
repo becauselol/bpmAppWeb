@@ -1,37 +1,35 @@
-const getPlaylists = async (access, userID, url) => {
+const endpoints = require("endpoints")
+
+exports.getData = async (access, userID, url = endpoints.url.playlists , playlistAcc = []) => {
+    const addToArray = (arr, response) => {
+        for (i = 0; i < response.data.items.length; i++) {
+            arr.push({
+                response.data.items[iter].id,
+                response.data.items[iter].name
+            });
+        };
+    };
 	const playlistOptions = options.playlist(access, userID);
 	playlistOptions.url = url;
-	const result = await axios({
-		method: "get",
-		url: playlistOptions.url,
-		headers: playlistOptions.headers
-	})
-	return result;
-}
-
-
-
-exports.playlistSelector = async (access_token, userID, nextPage = `https://api.spotify.com/v1/users/${userID}/playlists`) => {
-	try {
-		//get playlists
-		let playlistRes = await getPlaylists(access_token, userID, nextPage);
-		nextPage = playlistRes.data.next || null;
-		prevPage = playlistRes.data.previous || null
-		let playlistNames = data.store(playlistRes.data.items);
-		//prompt playlist
-		const selection = await p.selectPlaylist(playlistNames, prevPage, nextPage);
-		if (selection.selection === 'next') {
-			console.log('DISPLAYING NEXT...')
-			return exports.playlistSelector(access_token, userID, nextPage);
-		} else if (selection.selection === 'prev') {
-			console.log('DISPLAYING PREV...')
-			return exports.playlistSelector(access_token, userID, prevPage)
-		} else {
-			return selection.selection
-		}
-	} catch (err) {
-		console.log(err);
-	};
+    try {
+        const result = await axios({
+    		method: "get",
+    		url: playlistOptions.url,
+    		headers: playlistOptions.headers,
+            params: {
+                limit: 50
+            }
+    	})
+        if (result.data.next == null) {
+            addToArray(playlistAcc, result);
+            return playlistAcc;
+        } else {
+            addToArray(playlistAcc, result);
+            return exports.getPlaylistData(access, userID, result.data.next, playlistAcc);
+        }
+    } catch(err) {
+        console.log(err);
+    };
 };
 
 exports.createPlaylist = async (access, userID, selected, min, max) => {

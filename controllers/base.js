@@ -1,5 +1,8 @@
-exports.getAccessToken = async (code, redirect_uri, client_id, client_secret) => {
-	const authOptions = options.auth(code, redirect_uri, client_id, client_secret)
+const axios = require("axios");
+const endpoint = require("endpoints");
+
+exports.getToken = async (code) => {
+	const authOptions = endpoint.auth(code)
 	try {
 		console.log("REQUESTING TOKENS...");
 		const response = await axios({
@@ -15,15 +18,14 @@ exports.getAccessToken = async (code, redirect_uri, client_id, client_secret) =>
 };
 
 exports.getUserID = async (access) => {
-	const userOptions = options.user(access)
+	const userOptions = endpoint.user(access)
 	try {
 		const response = await axios({
 			method: "get",
 			url: userOptions.url,
 			headers: userOptions.headers
 		})
-		const userID = response.data.id;
-		return userID;
+		return response.data.id;
 	} catch (err) {
 		console.log(err);
 	};

@@ -1,4 +1,27 @@
-exports.auth = (code, redirect_uri, client_id, client_secret) => {
+require("dotenv").config();
+const querystring = require("querystring");
+
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+const redirect_uri =process.env.REDIRECT_URI;
+const scope = "playlist-read-private playlist-modify-private playlist-modify-public";
+
+exports.url = {
+    playlists: `https://api.spotify.com/v1/users/${userID}/playlists`,
+
+};
+
+exports.auth = {
+    url: "https://accounts.spotify.com/authorize?" +
+	querystring.stringify({
+		response_type: "code",
+		client_id: client_id,
+		scope: scope,
+		redirect_uri: redirect_uri,
+  	})
+}
+
+exports.token = (code) => {
 	return {
 		url: "https://accounts.spotify.com/api/token",
 		body: {
@@ -22,14 +45,14 @@ exports.user = (access) => {
 	};
 };
 
-exports.playlist = (access, userID) => {
+exports.playlists = (access, userID) => {
 	return {
 		url:`https://api.spotify.com/v1/users/${userID}/playlists`,
 		headers: { 'Authorization': `Bearer ${access}` }
 	};
 };
 
-exports.trackList = (access, playlistID) => {
+exports.tracks = (access, playlistID) => {
 	return {
 		url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
 		headers: { 'Authorization': `Bearer ${access}` },
