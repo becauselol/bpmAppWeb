@@ -4,7 +4,8 @@
   "description": "Sorts songs from your spotify playlist based on bpm",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node app.js",
+    "test": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "inquirer": "^7.1.0",
     "open": "^7.0.3",
     "querystring": "^0.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

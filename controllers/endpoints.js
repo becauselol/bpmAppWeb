@@ -1,4 +1,3 @@
-
 exports.auth = (code, redirect_uri, client_id, client_secret) => {
 	return {
 		url: "https://accounts.spotify.com/api/token",
