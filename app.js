@@ -9,10 +9,9 @@ const router = require("./routes/routes")
 
 const app = express();
 
-const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+const db = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
-const herokuDB = process.env.MONGODB_URI
-mongoose.connect(herokuDB, {
+mongoose.connect(db, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useFindAndModify: false,
