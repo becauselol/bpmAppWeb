@@ -4,7 +4,7 @@ const path = require("path");
 const pug = require("pug");
 const mongoose = require("mongoose")
 
-//my own stuff
+//my own stuffs
 const router = require("./routes/routes")
 
 const app = express();
