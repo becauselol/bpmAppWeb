@@ -11,7 +11,8 @@ const app = express();
 
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
-mongoose.connect(DB, {
+const herokuDB = process.env.MONGODB_URI
+mongoose.connect(herokuDB, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useFindAndModify: false,
