@@ -7,7 +7,6 @@ const User = require("./../models/userModel")
 //insert controller
 
 exports.landing =  async (req, res) => {
-
     res.render("landing", {url: endpoint.auth.url});
 };
 

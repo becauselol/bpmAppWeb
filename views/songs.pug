@@ -5,7 +5,15 @@ block content
 		h2 #{playlistName}
 		h3 Have fun exploring the Audio Features of #{playlistName}
 	div
-		table
+		form
+			label(for="min") BPM filter:  
+			input(type="text", id="min", name="min", placeholder="Minimum", onkeyup="filterBPM()") 
+			label(for="max")   -  
+			input(type="text", id="max", name="max", placeholder="Maximum", onkeyup="filterBPM()")
+			input(type="submit" value="Create")
+		p Simply click "Create" when the songs you desire are shown
+	div
+		table(id="songTable")
 			tr
 				th Song name
 				th Artist 
@@ -14,6 +22,5 @@ block content
 				tr
 					td=song.name 
 					td=song.artists[0].name 
-					td=song.tempo
-				
-				
+					td=song.tempo		
+	script(src="/js/filterSongs.js")

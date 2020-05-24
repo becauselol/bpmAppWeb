@@ -36,5 +36,7 @@ app.get("/creating", router.creation);
 app.get("/success", router.success);
 app.get("/failure", router.failure);
 
-console.log("Listening on 8888");
-app.listen(8888);
+const port = process.env.PORT || 8888;
+app.listen(port, () => {
+	console.log(`Listening on ${port}`)
+});
