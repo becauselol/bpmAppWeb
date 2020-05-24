@@ -3,12 +3,18 @@ const querystring = require("querystring");
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri =process.env.REDIRECT_URI;
+const redirect_uri = process.env.REDIRECT_URI;
 const scope = "playlist-read-private playlist-modify-private playlist-modify-public";
 
-exports.url = {
-    playlists: `https://api.spotify.com/v1/users/${userID}/playlists`,
+exports.url = (blank, need) => {
+	switch (need) {
+		case "playlists":
+			return `https://api.spotify.com/v1/users/${blank}/playlists`;
 
+		case "tracks":
+			return `https://api.spotify.com/v1/playlists/${blank}/tracks`
+
+	}
 };
 
 exports.auth = {
@@ -45,12 +51,19 @@ exports.user = (access) => {
 	};
 };
 
-exports.playlists = (access, userID) => {
+exports.playlistUser = (access, userID) => {
 	return {
 		url:`https://api.spotify.com/v1/users/${userID}/playlists`,
 		headers: { 'Authorization': `Bearer ${access}` }
 	};
 };
+
+exports.playlist = (access, playlistID) => {
+	return {
+		url: `https://api.spotify.com/v1/playlists/${playlistID}`,
+		headers: { 'Authorization': `Bearer ${access}` }
+	}
+}
 
 exports.tracks = (access, playlistID) => {
 	return {

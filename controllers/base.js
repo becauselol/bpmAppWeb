@@ -1,8 +1,10 @@
 const axios = require("axios");
-const endpoint = require("endpoints");
+const querystring = require("querystring")
+const endpoint = require("./endpoints");
+
 
 exports.getToken = async (code) => {
-	const authOptions = endpoint.auth(code)
+	const authOptions = endpoint.token(code)
 	try {
 		console.log("REQUESTING TOKENS...");
 		const response = await axios({
@@ -11,6 +13,7 @@ exports.getToken = async (code) => {
 			data: querystring.stringify(authOptions.body),
 			headers: authOptions.headers
 		})
+		console.log(response.data.access_token);
 		return [response.data.access_token, response.data.refresh_token];
 	} catch (err) {
 		console.log(err);

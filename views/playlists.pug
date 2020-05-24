@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content 
+	div
+		h2 Hi #{user}! 
+		h3 Select a playlist that you want to inspect the audio features for:
+	div
+		ul
+			each playlist in playlistArr
+				a(href=`${user}/${playlist.id}`)
+					li=playlist.name

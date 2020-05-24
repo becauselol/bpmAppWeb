@@ -1,0 +1,100 @@
+{
+	"added_at": "2020-04-15T11:27:17Z",
+	"added_by": {
+	  "external_urls": {
+		"spotify": "https://open.spotify.com/user/gabesytf"
+	  },
+	  "href": "https://api.spotify.com/v1/users/gabesytf",
+	  "id": "gabesytf",
+	  "type": "user",
+	  "uri": "spotify:user:gabesytf"
+	},
+	"is_local": false,
+	"primary_color": null,
+	"track": {
+	  "album": {
+		"album_type": "album",
+		"artists": [
+		  {
+			"external_urls": {
+			  "spotify": "https://open.spotify.com/artist/2MSatVNRZPT3184W9Hf2DD"
+			},
+			"href": "https://api.spotify.com/v1/artists/2MSatVNRZPT3184W9Hf2DD",
+			"id": "2MSatVNRZPT3184W9Hf2DD",
+			"name": "Lefty Hand Cream",
+			"type": "artist",
+			"uri": "spotify:artist:2MSatVNRZPT3184W9Hf2DD"
+		  }
+		],
+		"available_markets": [
+
+		],
+		"external_urls": {
+		  "spotify": "https://open.spotify.com/album/0dqAteEZlV1g5cIvb591YF"
+		},
+		"href": "https://api.spotify.com/v1/albums/0dqAteEZlV1g5cIvb591YF",
+		"id": "0dqAteEZlV1g5cIvb591YF",
+		"images": [
+		  {
+			"height": 640,
+			"url": "https://i.scdn.co/image/ab67616d0000b27384e9201802d2555338fcb2e4",
+			"width": 640
+		  },
+		  {
+			"height": 300,
+			"url": "https://i.scdn.co/image/ab67616d00001e0284e9201802d2555338fcb2e4",
+			"width": 300
+		  },
+		  {
+			"height": 64,
+			"url": "https://i.scdn.co/image/ab67616d0000485184e9201802d2555338fcb2e4",
+			"width": 64
+		  }
+		],
+		"name": "1LDK",
+		"release_date": "2020-01-20",
+		"release_date_precision": "day",
+		"total_tracks": 12,
+		"type": "album",
+		"uri": "spotify:album:0dqAteEZlV1g5cIvb591YF"
+	  },
+	  "artists": [
+		{
+		  "external_urls": {
+			"spotify": "https://open.spotify.com/artist/2MSatVNRZPT3184W9Hf2DD"
+		  },
+		  "href": "https://api.spotify.com/v1/artists/2MSatVNRZPT3184W9Hf2DD",
+		  "id": "2MSatVNRZPT3184W9Hf2DD",
+		  "name": "Lefty Hand Cream",
+		  "type": "artist",
+		  "uri": "spotify:artist:2MSatVNRZPT3184W9Hf2DD"
+		}
+	  ],
+	  "available_markets": [
+
+	  ],
+	  "disc_number": 1,
+	  "duration_ms": 237640,
+	  "episode": false,
+	  "explicit": false,
+	  "external_ids": {
+		"isrc": "JPPO01904979"
+	  },
+	  "external_urls": {
+		"spotify": "https://open.spotify.com/track/6sW8Odx6VkzZeRPoB6XCw4"
+	  },
+	  "href": "https://api.spotify.com/v1/tracks/6sW8Odx6VkzZeRPoB6XCw4",
+	  "id": "6sW8Odx6VkzZeRPoB6XCw4",
+	  "is_local": false,
+	  "name": "栞",
+	  "popularity": 26,
+	  "preview_url": "https://p.scdn.co/mp3-preview/1da28dd14ac2a55a6ed357afb111bb356d55b2bc?cid=f966e822e8624e3199d760c33b09fea2",
+	  "track": true,
+	  "track_number": 12,
+	  "type": "track",
+	  "uri": "spotify:track:6sW8Odx6VkzZeRPoB6XCw4"
+	},
+	"video_thumbnail": {
+	  "url": null
+	}
+  },
