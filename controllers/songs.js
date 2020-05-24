@@ -69,7 +69,7 @@ exports.getFeatures = async (access, songIDs, tracks) => {
 
 exports.add = async (access, playlistID, songList) => {
 	const songURIs = []
-	const addOptions = options.trackList(access, playlistID);
+	const addOptions = endpoint.tracks(access, playlistID);
 	addOptions.headers["Content-Type"] = "application/json"
 	for (i = 0; i < songList.length; i++) {
 		songURIs.push(songList[i].uri);

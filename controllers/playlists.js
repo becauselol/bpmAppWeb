@@ -48,7 +48,7 @@ exports.getName = async (access, playlistID) => {
 }
 
 exports.create = async (access, userID, selected, min, max) => {
-	const createOptions = options.playlist(access, userID);
+	const createOptions = endpoint.playlistUser(access, userID);
 	createOptions.headers["Content-Type"] = "application/json"
 	try {
 		const response = await axios({

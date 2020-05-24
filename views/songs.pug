@@ -5,11 +5,11 @@ block content
 		h2 #{playlistName}
 		h3 Have fun exploring the Audio Features of #{playlistName}
 	div
-		form
+		form(action=`${playlistID}/creating`, method="GET")
 			label(for="min") BPM filter:  
-			input(type="text", id="min", name="min", placeholder="Minimum", onkeyup="filterBPM()") 
+			input(type="text", id="min", name="min", placeholder="Minimum", onkeyup="filterBPM()", required="true") 
 			label(for="max")   -  
-			input(type="text", id="max", name="max", placeholder="Maximum", onkeyup="filterBPM()")
+			input(type="text", id="max", name="max", placeholder="Maximum", onkeyup="filterBPM()", required="true")
 			input(type="submit" value="Create")
 		p Simply click "Create" when the songs you desire are shown
 	div

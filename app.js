@@ -32,7 +32,7 @@ app.get("/", router.landing);
 app.get("/authsuccess", router.auth);
 app.get("/playlist/:user", router.playlist)
 app.get("/playlist/:user/:id", router.options);
-app.get("/creating", router.creation);
+app.get("/playlist/:user/:id/creating", router.creation);
 app.get("/success", router.success);
 app.get("/failure", router.failure);
 
